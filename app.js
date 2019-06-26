@@ -5,8 +5,8 @@ const app = express()
 
 app.set("view engine","ejs");
 
-app.get('/home', function (req, res) {
-    res.render('home');
+app.get('/tasks', function (req, res) {
+    res.render('tasks');
   });
 
   app.listen(3000, function(err){

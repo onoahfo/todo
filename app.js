@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 
+// setting template engine
 app.set("view engine","ejs");
 
 // use middle ware to serve static files

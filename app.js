@@ -1,7 +1,10 @@
 const express = require('express')
-const app = express()
+const app = express();
 
 app.set("view engine","ejs");
+
+// use middle ware to serve static files
+app.use(express.static('./public'));
 
 app.get('/tasks', function (req, res) {
     res.render('tasks');

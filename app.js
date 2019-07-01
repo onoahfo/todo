@@ -37,7 +37,7 @@ app.delete("/tasks/:id", function(req, res){
     // console.log(req.params.id);
     dummyData.splice(req.params.id, 1);
     // console.log(dummyData);
-    res.redirect('/tasks')
+    res.json(dummyData)
 });
 
 app.listen(3000, function(err){

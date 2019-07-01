@@ -19,16 +19,25 @@ app.use(express.static('./public'));
 
 // Get for tasks: returns all tasks
 app.get('/tasks', function (req, res) {
+    console.log("hitting get route");
     res.render('tasks', {taskToDo: dummyData});
 });
 
 // Post for tasks: posting a task
 app.post('/tasks', urlEncoded, function(req, res){
+  console.log("hitting Post route");
   let incomingItem = {}
   incomingItem.taskItem = req.body.task
   dummyData.push(incomingItem)
   console.log(dummyData)
   res.redirect('/tasks')
+});
+
+app.delete("/tasks/:id", function(req, res){
+    // console.log(req.params.id);
+    dummyData.splice(req.params.id, 1);
+    // console.log(dummyData);
+    res.redirect('/tasks')
 });
 
 app.listen(3000, function(err){

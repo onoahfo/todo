@@ -13,32 +13,31 @@ app.set("view engine","ejs");
 // use middle ware to serve static files
 app.use(express.static('./public'));
 
-
-
 // ############### ROUTES ##############
 
 // Get for tasks: returns all tasks
-app.get('/tasks', function (req, res) {
-    console.log("hitting get route");
+app.get('/', (req, res) => {
+    // rendering tasks view and passing taskToDo data
     res.render('tasks', {taskToDo: dummyData});
 });
 
 // Post for tasks: posting a task
-app.post('/tasks', urlEncoded, function(req, res){
-  console.log("hitting Post route");
-  let incomingItem = {}
-  incomingItem.taskItem = req.body.task
-  dummyData.push(incomingItem)
-  console.log(dummyData)
-  res.redirect('/tasks')
+app.post('/tasks', urlEncoded, (req, res) => {
+    //formatting for incoming data to add to my data set
+    let incomingItem = {};
+    incomingItem.taskItem = req.body.task;
+    dummyData.push(incomingItem)
+    console.log(dummyData);
+    res.redirect('/')
 });
 
-app.delete("/tasks/:id", function(req, res){
-    // console.log(req.params.id);
+//Delete for task: deleting specify task
+app.delete("/tasks/:id", (req, res) => {
+    //deleting item from data set 
     dummyData.splice(req.params.id, 1);
-    // console.log(dummyData);
     res.json(dummyData)
 });
+
 
 app.listen(3000, function(err){
     if (err)

@@ -1,6 +1,20 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const urlEncoded = bodyParser.urlencoded({extended: false})
+const express = require('express');
+const bodyParser = require('body-parser');
+const mysql = require('mysql');
+
+const db = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'admin',
+    password : '00no@hf0011',
+    database : 'my_db'
+});
+
+db.connect(function(err){
+    if (err) throw err;
+    console.log("DB is connected...")
+});
+
+const urlEncoded = bodyParser.urlencoded({extended: false});
 
 const dummyData = [{taskItem: "Work on my portfolio" },{taskItem: "Code and watch anime"},{taskItem: "Sleep"}];
 

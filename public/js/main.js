@@ -11,10 +11,6 @@ for (let i = 0; i < taskItems.length; i++) {
     }) 
 }
 
-
-
-
-
     element.addEventListener('click', function(){
 
         fetch('/tasks/' + element.id, {method: "delete"} )

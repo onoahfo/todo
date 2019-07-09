@@ -50,12 +50,11 @@ app.post('/tasks', urlEncoded, (req, res) => {
         console.log(results)
         res.redirect('/')
     });
-  
 });
 
 // Delete for task: deleting specify task
 app.delete("/tasks/:id", (req, res) => {
-    let sql = 'DELETE  FROM task WHERE ID = ' + req.params.id;
+    let sql = 'DELETE  FROM task WHERE ID=' + req.params.id;
     db.query(sql,(err, result) =>{
         if(err) throw err;
         console.log(result);

@@ -6,7 +6,7 @@ const db = mysql.createConnection({
     host     : 'localhost',
     user     : 'admin',
     password : '00no@hf0011',
-    database : 'my_db'
+    database : 'ninjatasker'
 });
 
 db.connect(function(err){
@@ -31,17 +31,29 @@ app.use(express.static('./public'));
 
 // Get for tasks: returns all tasks
 app.get('/', (req, res) => {
-    // rendering tasks view and passing taskToDo data
-    res.render('tasks.ejs', {taskToDo: dummyData});
+    let sql = 'SELECT * FROM task';
+    db.query(sql, function(err, results,) {
+        if(err) throw err;
+        // rendering tasks view and passing taskToDo data
+        res.render('tasks.ejs', {taskToDo: results});
+    });
 });
 
 // Post for tasks: posting a task
 app.post('/tasks', urlEncoded, (req, res) => {
+    let task = req.body
+    let sql = 'INSERT INTO task SET ?';
+    db.query(sql, task, function(err, results,) {
+        if(err) throw err;
+        // rendering tasks view and passing taskToDo data
+        console.log(results)
+        res.redirect('/')
+    });
 // formatting for incoming data to add to my data set
-  let incomingItem = {};
-  incomingItem.taskItem = req.body.task;
-  dummyData.push(incomingItem);
-  res.redirect('/')
+//   let incomingItem = {};
+//   incomingItem.taskItem = req.body.task;
+//   dummyData.push(incomingItem);
+
 });
 
 // Delete for task: deleting specify task

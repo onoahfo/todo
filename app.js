@@ -1,8 +1,15 @@
 const express = require('express');
 const routes = require('./routes');
+const database = require('./models/todo');
 
 // starting up app
 const app = express();
+
+// adding context to our request
+app.use( (req, res, next) => {
+    req.context = {db: database};
+    next();
+});
 
 //routing manager
 app.use(routes);
